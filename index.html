@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>just a color</title>
+    </head>
+    <body>
+        <div id="help" style="display: none">
+            Add '#' and a color to the URL to get a page that's just a color.<br><br>
+            Examples:
+            <ul>
+                <li><a href="#green">green</a></li>
+                <li><a href="#F5DF4D">F5DF4D</a></li>
+                <li><a href="#linear-gradient(#3f87a6,#ebf8e1,#f69d3c)">linear-gradient(#3f87a6,#ebf8e1,#f69d3c)</a></li>
+            </ul>
+        </div>
+        <script>
+            function update() {
+                var url = window.location.toString();
+                var help = document.getElementById('help');
+                var color = window.location.hash.substring(1);
+                if (/^[0-9a-f]{3}$/i.test(color) || /^[0-9a-f]{6}$/i.test(color)) {
+                    color = '#' + color;
+                }
+                if (color) {
+                    document.body.style.background = color;
+                    help.style.display = 'none';
+                } else {
+                    document.body.style.background = '';
+                    help.style.display = 'block';
+                }
+            }
+            window.addEventListener('hashchange', update);
+            update();
+        </script>
+    </body>
+</html>
